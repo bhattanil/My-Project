@@ -1,1 +1,193 @@
+Name – Anil Bhatt
+
+Dockerfile for nginx 1.19
+Write a Dockerfile to run nginx version 1.19 in a container. Choose a base image, considering security best practices, and aim for the image to pass a container image security test
+Your answer
+
+FROM nginx:1.19-alpine
+RUN apt install nginx
+COPY ./html /use/share/nginx/
+COPY ./nginx.conf /etc/nginx/
+EXPOSE 80
+ENTRYPOINT [“nginx”, “-g”, “daemon off;”]
+
+Docker build -t abc_nginx:1.19-alpine .
+Docker push #push image to docker hub
+
+
+
+Kubernetes StatefulSet
+Write a Kubernetes StatefulSet to deploy the nginx container from the previous question. Utilize persistent volume claims and define resource limits for optimal performance.
+Your answer
+
+—
+apiVersion: v1
+kind: StatefulSet
+metadata:
+     name: app_name
+     app: abc
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+           app: abc
+    templates:
+        metadata:
+             name: app_name
+        spec:
+            containers:
+                 image: abc_nginx:1.19-alpine
+                 ports:
+                      container ports: 80
+             resources:
+                 requests:
+                     cpu: “500m”
+                     mem: “500Mi”
+                 limits:
+                     cpu: “500m”
+                     mem: “500Mi”
+             volumeMount:
+                   name: app_data
+                   mountPath: /data
+          volumeClaimTemplates:
+name: app_data
+requests:
+    access method: [ReadWriteOnce]
+    storage: “1Gi”
+—
+apiVersion: v1
+kind: Service
+metadata:
+     name: app_service
+spec:
+    selector:
+       app: abc
+service:
+     name: abc_service
+     ports:
+         port:80
+         targetPort:80
+         NodePort: 32000
+type: NodePort
+
+Build a Deployment Pipeline
+Set up a streamlined build and deployment pipeline for the nginx application using GitHub Actions or an equivalent CI/CD tool. Ensure the pipeline covers building the Docker image, running security checks, and deploying to a Kubernetes cluster.
+Your answer
+
+Pipeline{
+Stages{
+    Stage(“git clone”){
+        Steps{
+           Sh “Git scm code to ”
+}
+}
+Stage(“code security scan”){
+        Steps{
+           Sh “sonarqube check”
+}
+}
+Stage(“Build”){
+        Steps{
+           Sh “install all dependencies”
+           Sh “grqdlew build .”
+}
+}
+Stage(“Docker Image Build”){
+        Steps{
+           Sh “docker build .”
+           Sh “test case docker”
+}
+}
+Stage(“Docker Image Push”){
+        Steps{
+           Sh “docker push repo:image ”
+}
+}
+Stage(“Docker scan”){
+        Steps{
+           Sh “docker scan repo:image”
+}
+}
+Stage(“Kubernetes clone code”){
+        Steps{
+           Sh “git clone code from git repo ”
+}
+}
+Stage(“code security san kubernetes”){
+        Steps{
+           Sh “sonarqube check”
+}
+}
+Stage(“Kubernetes deploy code”){
+        Steps{
+           withCredential(abccredentialid) # stored in credential
+           Sh “kubelet apply -f app.yml ”
+}
+}
+Post{
+    Success{
+         Echo ”success”
+}
+   Failure{
+        Echo “failed”
+}
+Post(ws)
+}
+
+Text Manipulation Problem
+Choose or create a text manipulation problem that involves using awk, sed, tr, and/or grep. Solve the problem, considering efficiency and readability.
+Your answer
+
+Awk ‘{print $1 $2}’ abc.csv
+Tr ‘a-z’ ‘A-Z’ abc.csv
+Sed -I ‘s|ab|xy|g’ abc.csv
+Grep ‘error’ abc.csv
+
+Text Manipulation with an Object Orientated Programming Language
+Solve the text manipulation problem from the previous question using any Object Orientated Programming language of your choice. Provide a clear and well-documented solution.
+Your answer
+
+Class text_manipulation(text)
+   Def self_text(self, text):
+          self_text(self, text)
+   Def self_test_upper(text):
+         self_test.upper(text)
+text=”Hello this is text manipulation”
+text_manipulation.self_test_upper(text)
+
+Sum of Even Fibonacci Numbers
+Write a program in a Object Orientated Programming language of your choice to calculate the sum of the first 100 even-valued Fibonacci numbers. Consider efficiency and demonstrate good coding practices.
+Your answer
+
+#!/use/local/bin/python
+
+Class sum_fib(limit)
+   a,b=0,1
+   sum=0
+   while b<limit:
+       if b%2 ==0:
+       then
+           sum=sum+b
+       else:
+          print(“the no. is odd”)
+    a,b=b,a+b
+limit=100
+sum_fib(limit)
+print(sum)
+
+Intersection of Sorted Arrays
+Write a function in a Object Orientated Programming language of your choice that takes two sorted arrays of integers as input and returns an array containing numbers common to both arrays without duplicates.
+Your answer
+
+
+
+
+
+
+
+Decimal Digit Transformation
+Write a function in an Object Orientated Programming language of your choice that, when passed a decimal digit X, calculates and returns the value of X + XX + XXX + XXXX. For example, if X is 3, the function should return 3702 (3 + 33 + 333 + 3333). Ensure the function handles valid inputs and provides meaningful error messages for invalid inputs.
+Your answer
+
+
 
