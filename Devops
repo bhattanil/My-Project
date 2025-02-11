@@ -179,7 +179,11 @@ Intersection of Sorted Arrays
 Write a function in a Object Orientated Programming language of your choice that takes two sorted arrays of integers as input and returns an array containing numbers common to both arrays without duplicates.
 Your answer
 
-
+class ArrayIntersection:
+   def __init__(self, array1, array2):
+      self.array1 = array1
+      self.array2 = array2
+   def find_intersection(
 
 
 
