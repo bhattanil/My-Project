@@ -185,13 +185,80 @@ class ArrayIntersection:
       self.array2 = array2
    def find_intersection(
 
+# Function to find the intersection of two arrays
+# It returns a list containing the common elements
+def intersection(a, b):
+    res = []
+    m = len(a)
+    n = len(b)
+
+    for i in range(m):
+      
+        # Note that duplicates must be 
+        # consecutive in a sorted array
+        if i > 0 and a[i - 1] == a[i]:
+            continue
+
+        # Since we are only searching distinct
+        # elements of a[] in b[] and we break as 
+        # soon we find a match, we get only
+        # distinct elements in result
+        for j in range(n):
+            if a[i] == b[j]:
+                res.append(a[i])
+                break
+
+    return res
+
+# Driver code
+a = [3, 5, 10, 10, 10, 15, 15, 20]
+b = [5, 10, 10, 15, 30]
+res = intersection(a, b)
+print(" ".join(map(str, res)))
 
 
 
-
-Decimal Digit Transformation
-Write a function in an Object Orientated Programming language of your choice that, when passed a decimal digit X, calculates and returns the value of X + XX + XXX + XXXX. For example, if X is 3, the function should return 3702 (3 + 33 + 333 + 3333). Ensure the function handles valid inputs and provides meaningful error messages for invalid inputs.
+Decimal Digit Transformatio
+write a function in an Object Orientated Programming language of your choice that, when passed a decimal digit X, calculates and returns the value of X + XX + XXX + XXXX. For example, if X is 3, the function should return 3702 (3 + 33 + 333 + 3333). Ensure the function handles valid inputs and provides meaningful error messages for invalid inputs.
 Your answer
+```
+class DigitSumCalculator:
+    def calculate_sum(self, digit):
+        """
+        Calculates the sum of X + XX + XXX + XXXX.
+
+        Args:
+            digit (int): A decimal digit between 1 and 9.
+
+        Returns:
+            int: The calculated sum.
+
+        Raises:
+            TypeError: If the input is not an integer.
+            ValueError: If the input is not a decimal digit.
+        """
+
+        # Check if input is an integer
+        if not isinstance(digit, int):
+            raise TypeError("Input must be an integer.")
+
+        # Check if input is a decimal digit
+        if not 1 <= digit <= 9:
+            raise ValueError("Input must be a decimal digit between 1 and 9.")
+
+        # Calculate the sum
+        total = 0
+        for i in range(1, 5):
+            total += int(str(digit) * i)
+
+        return total
+
+Example usage:
+calculator = DigitSumCalculator()
+print(calculator.calculate_sum(3))  # Output: 3702
+```
+
+
 
 
 
